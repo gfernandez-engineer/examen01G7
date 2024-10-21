@@ -21,9 +21,10 @@ public class PedidoEntity {
     @Column(name = "estado",nullable = false)
     private String estado;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "persona_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private PersonaEntity persona;
 
 }

@@ -22,7 +22,7 @@ public class PersonaEntity {
     private String apellidos;
     private String estado;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private DireccionEntity direccionEntity;
 

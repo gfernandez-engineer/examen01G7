@@ -1,6 +1,7 @@
 package com.examenG7.examen.service.impl;
 
 import com.examenG7.examen.entity.DireccionEntity;
+import com.examenG7.examen.entity.PedidoEntity;
 import com.examenG7.examen.entity.PersonaEntity;
 import com.examenG7.examen.repository.PersonaRepository;
 import com.examenG7.examen.service.PersonaService;
@@ -43,9 +44,20 @@ public class PersonaSeviceImpl implements PersonaService {
         personaExistente.setNombres(personaActual.getNombres());
         personaExistente.setApellidos(personaActual.getApellidos());
         personaExistente.setEstado(personaActual.getEstado());
+
         // Actualizar la dirección
         if (personaActual.getDireccionEntity() != null) {
             personaExistente.setDireccionEntity(personaActual.getDireccionEntity());
+        }
+
+        // Actualizar la lista de pedidos
+        if (personaActual.getPedidos() != null) {
+            personaExistente.getPedidos().clear();
+
+            for (PedidoEntity pedido : personaActual.getPedidos()) {
+                pedido.setPersona(personaExistente);
+                personaExistente.getPedidos().add(pedido);
+            }
         }
 
         return personaRepository.save(personaExistente);
